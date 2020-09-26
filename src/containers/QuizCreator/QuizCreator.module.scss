@@ -1,0 +1,15 @@
+.QuizCreator {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  background: rgba(180, 179, 201, 0.7);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  h1 {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+}

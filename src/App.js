@@ -1,10 +1,18 @@
 import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import QuizCreator from './containers/QuizCreator/QuizCreator';
+import QuizList from './containers/QuizList/QuizList';
+import Layout from './Layout/Layout';
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <Layout>
+      <Switch>
+        <Route path="/quiz-creator" exact component={QuizCreator} />
+        <Route path="/" exact component={QuizList} />
+        <Redirect to="/" />
+      </Switch>
+    </Layout>
   );
 }
 
