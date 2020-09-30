@@ -1,2 +1,52 @@
 .QuizList {
+  padding: 15px 30px 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(115, 63, 255, 0.5) 0%,
+    rgba(63, 184, 255, 0.5) 100%
+  );
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  h1 {
+    margin-bottom: 15px;
+    padding-bottom: 3px;
+    width: fit-content;
+    border-bottom: 3px solid #000;
+    color: #000;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: inside;
+  }
+
+  li {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: 0.25s;
+
+    & + li {
+      margin-top: 15px;
+    }
+
+    &:hover {
+      transform: scale(1.015);
+    }
+
+    &:active {
+      transform: scale(0.995);
+      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  a {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 10px;
+    color: #000;
+    line-height: 1.5em;
+    letter-spacing: 0.1px;
+  }
 }

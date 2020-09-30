@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import classes from './NavMenu.module.scss';
+import React from 'react' 
+import { NavLink } from 'react-router-dom' 
+import classes from './NavMenu.module.scss' 
 
 const renderLinks = (links) => {
   return links.map((link, index) => {
@@ -16,17 +16,17 @@ const renderLinks = (links) => {
           {link.label}
         </NavLink>
       </li>
-    );
-  });
-};
+    ) 
+  }) 
+} 
 
 const links = [
   { to: '/', label: 'Quiz list', exact: true },
   { to: '/quiz-creator', label: 'Create a quiz' },
-];
+] 
 
 const NavMenu = () => {
-  return <ul className={classes.NavMenu}>{renderLinks(links)}</ul>;
-};
+  return <ul className={classes.NavMenu}>{renderLinks(links)}</ul> 
+} 
 
-export default NavMenu;
+export default NavMenu 

@@ -3,8 +3,14 @@ import {
   CHANGE_IS_FORM_VALID,
   SET_RIGHT_ANSWER,
   CREATE_QUIZ_QUESTION,
-  RESET_QUIZ_CREATION,
-} from '../actions/actionTypes';
+  CHANGE_QUIZ_CONTROLS,
+  CREATE_QUIZ_TITLE,
+  SET_INITIAL_STATE,
+  CHANGE_IS_RENDER_TITLE,
+  SET_EDITABLE_QUESTION,
+  EDIT_QUIZ_QUESTION,
+  CHANGE_IS_EDIT_QUIZ_TITLE,
+} from '../actions/actionTypes'
 
 const createControl = (config, validation) => {
   return {
@@ -13,41 +19,55 @@ const createControl = (config, validation) => {
     valid: !validation,
     touched: false,
     value: '',
-  };
-};
+  }
+}
 
-const createOptionControl = (number) =>
+const createOptionControl = number =>
   createControl(
     {
-      label: `Вариант ${number}`,
-      errorMessage: 'Значение не может быть пустым',
+      label: `Answer option ${number}`,
+      errorMessage: 'Answer option cannot be empty',
       id: number,
     },
-    { required: true }
-  );
+    {required: true}
+  )
 
 export const createFormControls = () => {
   return {
     question: createControl(
       {
-        label: 'Введите вопрос',
-        errorMessage: 'Вопрос не может быть пустым',
+        label: 'ENTER QUESTION',
+        errorMessage: 'Question cannot be empty',
       },
-      { required: true }
+      {required: true}
     ),
     option1: createOptionControl(1),
     option2: createOptionControl(2),
     option3: createOptionControl(3),
     option4: createOptionControl(4),
-  };
-};
+  }
+}
+
+export const createTitleControls = () =>
+  createControl(
+    {
+      label: 'Enter quiz name',
+      errorMessage: 'Quiz name cannot be empty',
+    },
+    {required: true}
+  )
 
 const initialState = {
   isFormValid: false,
-  rightAnswerId: 1,
+  rightAnswerId: 0,
   formControls: createFormControls(),
+  titleControls: createTitleControls(),
+  quizTitle: '',
   quiz: [],
-};
+  editableQuestion: null,
+  isRenderTitle: true,
+  isEditQuizTitle: false,
+}
 
 const quizCreatorReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -55,30 +75,60 @@ const quizCreatorReducer = (state = initialState, action) => {
       return {
         ...state,
         rightAnswerId: action.id,
-      };
+      }
     case CHANGE_IS_FORM_VALID:
       return {
         ...state,
         isFormValid: action.validState,
-      };
+      }
     case CHANGE_FORM_CONTROLS:
       return {
         ...state,
         formControls: action.formControls,
-      };
+      }
     case CREATE_QUIZ_QUESTION:
       return {
         ...state,
         quiz: [...state.quiz, action.questionItem],
-      };
-    case RESET_QUIZ_CREATION:
+      }
+    case EDIT_QUIZ_QUESTION:
       return {
         ...state,
-        quiz: [],
-      };
+        quiz: action.quiz,
+      }
+    case CHANGE_QUIZ_CONTROLS:
+      return {
+        ...state,
+        titleControls: action.data,
+      }
+    case CREATE_QUIZ_TITLE:
+      return {
+        ...state,
+        quizTitle: state.titleControls.value,
+        titleControls: createTitleControls(),
+      }
+    case SET_INITIAL_STATE:
+      return {
+        ...initialState,
+      }
+    case CHANGE_IS_RENDER_TITLE:
+      return {
+        ...state,
+        isRenderTitle: action.value,
+      } 
+    case SET_EDITABLE_QUESTION:
+      return {
+        ...state,
+        editableQuestion: action.id,
+      } 
+    case CHANGE_IS_EDIT_QUIZ_TITLE:
+      return {
+        ...state,
+        isEditQuizTitle: action.value,
+      } 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default quizCreatorReducer;
+export default quizCreatorReducer

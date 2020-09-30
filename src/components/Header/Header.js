@@ -1,8 +1,8 @@
-import React from 'react';
-import classes from './Header.module.scss';
-import logo from '../../logo.svg';
-import NavMenu from '../navigation/NavMenu/NavMenu';
-import { NavLink } from 'react-router-dom';
+import React from 'react' 
+import classes from './Header.module.scss' 
+import logo from '../../logo.svg' 
+import NavMenu from '../navigation/NavMenu/NavMenu' 
+import { NavLink } from 'react-router-dom' 
 
 const Header = () => {
   return (
@@ -16,7 +16,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  ) 
+} 
 
-export default Header;
+export default Header 

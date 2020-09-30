@@ -1,19 +1,23 @@
-import React from 'react';
-import classes from './Input.module.scss';
+import React from 'react' 
+import classes from './Input.module.scss' 
 
 function isInvalid({ valid, touched, shouldValidate }) {
-  return !valid && shouldValidate && touched;
+  return !valid && shouldValidate && touched 
 }
 
 const Input = (props) => {
-  const inputType = props.type || 'text';
-  const cls = [classes.Input];
+  const inputType = props.type || 'text' 
+  const cls = [classes.Input] 
   const htmlFor = `${inputType}-${Math.round(Math.random() * 1e8).toString(
     16
-  )}`;
-
+  )}` 
+  
   if (isInvalid(props)) {
-    cls.push(classes.invalid);
+    cls.push(classes.invalid) 
+  }
+  
+  if (props.isRight) {
+    cls.push(classes.right) 
   }
 
   return (
@@ -29,7 +33,7 @@ const Input = (props) => {
         <span>{props.errorMessage || 'Enter correct value'}</span>
       ) : null}
     </div>
-  );
-};
+  ) 
+} 
 
-export default Input;
+export default Input 

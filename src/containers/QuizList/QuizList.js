@@ -1,22 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import classes from './QuizList.module.scss';
+import React from 'react' 
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom' 
+import classes from './QuizList.module.scss' 
+import Loader from '../../components/UI/Loader/Loader'
+import {fetchQuizes} from '../../store/actions/quizList'
 
-const list = ['How do you realy feel?', 'Check your English level'];
+class QuizList extends React.Component {
+  renderQuizes() {
+    return this.props.quizes.map(quiz => {
+      return (
+        <li
+          key={quiz.id}
+        >
+          <Link to={'/quiz/' + quiz.id}>
+            {'✔ ' + quiz.name}
+          </Link>
+        </li>
+      )
+    })
+  }
 
-const renderQuizes = (quizes) => {
-  return quizes.map((quiz, index) => (
-    <li key={index}>
-      <Link to={'/quiz/:id'}>{quiz}</Link>
-    </li>
-  ));
-};
+  componentDidMount() {
+    this.props.fetchQuizes()
+  }
 
-const QuizList = () => (
-  <div className={classes.QuizList}>
-    <h1>Quiz list</h1>
-    {renderQuizes(list)}
-  </div>
-);
+  render() {
+    return (
+      <div className={classes.QuizList}>
+        <div>
+          <h1>Quiz list</h1>
+          {
+            this.props.loading
+              ? <Loader/>
+              : <ul>
+                  {this.renderQuizes()}
+                </ul>
+          }
+        </div>
+      </div>
+    )
+  }
+}
 
-export default QuizList;
+const mapStateToProps = state => {
+  return {
+    quizes: state.list.quizes,
+    loading: state.list.loading
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchQuizes: () => dispatch(fetchQuizes())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizList) 
