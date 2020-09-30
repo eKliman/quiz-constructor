@@ -1,0 +1,40 @@
+.FinishedQuiz {
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  ul {
+    list-style: none;
+    padding: 7px;
+    margin: 15px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  li + li {
+    margin-top: 5px;
+  }
+
+  i {
+    margin-left: 10px;
+  }
+
+  a {
+    margin-left: 10px;
+  }
+}
+
+.result {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.success {
+  color: #00ff00;
+}
+
+.error {
+  color: #ff0000;
+}

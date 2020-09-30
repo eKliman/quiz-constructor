@@ -14,7 +14,7 @@ import {
   changeIsEditQuizTitle,
   setEditableQuestion,
 } from '../../store/actions/quizCreator'
-import {fetchQuizesStart} from '../../store/actions/quizList'
+import {fetchQuizesStart} from '../../store/actions/quiz'
 import {createFormControls} from '../../store/reducers/quizCreator' 
 import Button from '../../components/UI/Button/Button'
 import classes from './QuizCreator.module.scss'
@@ -85,7 +85,7 @@ const mapStateToProps = state => {
     quiz: state.create.quiz,
     isEditQuizTitle: state.create.isEditQuizTitle,
     editableQuestion: state.create.editableQuestion,
-    loading: state.list.loading,
+    loading: state.quiz.loading,
   }
 }
 

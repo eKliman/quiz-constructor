@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom' 
 import classes from './QuizList.module.scss' 
 import Loader from '../../components/UI/Loader/Loader'
-import {fetchQuizes} from '../../store/actions/quizList'
+import {fetchQuizes} from '../../store/actions/quiz'
 
 class QuizList extends React.Component {
   renderQuizes() {
@@ -44,8 +44,8 @@ class QuizList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    quizes: state.list.quizes,
-    loading: state.list.loading
+    quizes: state.quiz.quizes,
+    loading: state.quiz.loading
   }
 }
 
