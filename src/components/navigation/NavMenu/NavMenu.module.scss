@@ -17,3 +17,40 @@
     font-weight: 700;
   }
 }
+
+@media (max-width: 650px) {
+  .NavMenu {
+    position: fixed;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 300px;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    transform: translateX(0px);
+    transition: transform 0.25s ease-in;
+    z-index: 90;
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    a {
+      color: #363d54;
+      font-size: 30px;
+      text-decoration: none;
+      background-color: #fff;
+      position: relative;
+      padding-bottom: 10px;
+      transition: opacity 0.3s;
+    }
+  }
+
+  .closed {
+    transform: translateX(-300px);
+  }
+}

@@ -1,8 +1,8 @@
 const baseURL = 'https://quiz-constructor.firebaseio.com/' 
 
-export const sendRequest = async (method, url, data = null) => {
+export const sendRequest = async (method, url, data = null, useBaseURL = true) => {
   const headers = { 'Content-Type': 'application/json' } 
-  const requestURL = baseURL + url 
+  const requestURL = useBaseURL ? baseURL + url : url 
 
   if (method === 'POST') {
     try {
@@ -12,8 +12,8 @@ export const sendRequest = async (method, url, data = null) => {
         headers: headers,
       }) 
       return response.json() 
-    } catch (e) {
-      console.log(e) 
+    } catch(err) {
+      console.log(err.message) 
     }
   } else {
     try {
@@ -22,8 +22,8 @@ export const sendRequest = async (method, url, data = null) => {
         headers: headers,
       }) 
       return response.json() 
-    } catch (e) {
-      console.log(e) 
+    } catch(e) {
+      console.log(e.message) 
     }
   }
 } 

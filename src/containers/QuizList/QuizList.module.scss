@@ -10,7 +10,6 @@
 
   h1 {
     margin-bottom: 15px;
-    padding-bottom: 3px;
     width: fit-content;
     border-bottom: 3px solid #000;
     color: #000;
@@ -48,5 +47,15 @@
     color: #000;
     line-height: 1.5em;
     letter-spacing: 0.1px;
+  }
+}
+
+@media (max-width: 400px) {
+  .QuizList {
+    padding: 15px;
+
+    h1 {
+      font-size: 1.8em;
+    }
   }
 }

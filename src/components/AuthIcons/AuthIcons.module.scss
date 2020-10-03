@@ -1,0 +1,15 @@
+.AuthIcons {
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    color: #64c6ff;
+  }
+
+  &:active {
+    color: #64c6ff;
+    transform: scale(0.95);
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react' 
 import {connect} from 'react-redux' 
-import {withRouter} from 'react-router-dom' 
+import {Redirect, withRouter} from 'react-router-dom' 
 import QuestionCreater from '../../components/QuestionCreater/QuestionCreater' 
 import QuestionList from '../../components/QuestonList/QuestionList' 
 import QuizTitleCreater from '../../components/QuizTitleCreater/QuizTitleCreater' 
@@ -44,38 +44,40 @@ const QuizCreator = props => {
   }
 
   return (
-    <div className={classes.QuizCreator}>
-      <h1>Quiz creation</h1>
-      <QuestionList />
-      {
-        props.loading
-          ? <Loader/>
-          : props.isRenderTitle ? <QuizTitleCreater /> : <QuestionCreater />
-      }
-      
-      <div className={classes.buttonsBlock}>
-        {
-          props.editableQuestion !== null || props.isEditQuizTitle
-            ? <Button
-              type="primary"
-              onClick={newQuestionHandler}
+    props.isAuthenticated 
+      ? <div className={classes.QuizCreator}>
+          <h1>Quiz creation</h1>
+          <QuestionList />
+          {
+            props.loading
+              ? <Loader/>
+              : props.isRenderTitle ? <QuizTitleCreater /> : <QuestionCreater />
+          }
+          
+          <div className={classes.buttonsBlock}>
+            {
+              props.editableQuestion !== null || props.isEditQuizTitle
+                ? <Button
+                  type="primary"
+                  onClick={newQuestionHandler}
+                >
+                  New question
+                </Button>
+              : null
+            }
+            <Button
+              type="success"
+              onClick={createQuizHandler}
+              disabled={props.quiz.length === 0}
             >
-              New question
+              Create quiz
             </Button>
-          : null
-        }
-        <Button
-          type="success"
-          onClick={createQuizHandler}
-          disabled={props.quiz.length === 0}
-        >
-          Create quiz
-        </Button>
-        <Button type="cancel" onClick={cancelHandler}>
-          Cancel
-        </Button>
-      </div>
-    </div>
+            <Button type="cancel" onClick={cancelHandler}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      : <Redirect to="/auth" />
   )
 }
 
@@ -86,6 +88,7 @@ const mapStateToProps = state => {
     isEditQuizTitle: state.create.isEditQuizTitle,
     editableQuestion: state.create.editableQuestion,
     loading: state.quiz.loading,
+    isAuthenticated: !!state.auth.token,
   }
 }
 
@@ -99,7 +102,7 @@ const mapDispatchToProps = dispatch => {
     changeIsEditQuizTitle: value => dispatch(changeIsEditQuizTitle(value)),
     changeIsRenderTitle: (value) => dispatch(changeIsRenderTitle(value)),
     setEditableQuestion: (id) => dispatch(setEditableQuestion(id)),
-    fetchQuizesStart: (id) => dispatch(fetchQuizesStart()),
+    fetchQuizesStart: () => dispatch(fetchQuizesStart()),
   }
 }
 
