@@ -20,12 +20,14 @@ const Auth = props => {
     event.preventDefault()
   }
 
-  const onChangeHandler = (event, controlName) => {
+  const onChangeHandler = (event, controlName, isBlur = false) => {
     const formControls = {...props.formControls}
     const control = {...formControls[controlName]}
 
     control.value = event.target.value
-    control.touched = true
+    if (isBlur) {
+      control.touched = true
+    }
     control.valid = validateControl(control.value, control.validation)
 
     formControls[controlName] = control
@@ -52,6 +54,7 @@ const Auth = props => {
           shouldValidate={!!control.validation}
           errorMessage={control.errorMessage}
           onChange={event => onChangeHandler(event, controlName)}
+          onBlur={event => onChangeHandler(event, controlName, true)}
         />
       )
     })

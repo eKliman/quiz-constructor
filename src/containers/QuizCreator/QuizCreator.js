@@ -30,7 +30,6 @@ const QuizCreator = props => {
 
   const cancelHandler = () => {
     props.setInitialState()
-    props.history.push('/')
   } 
 
   const newQuestionHandler = () => {
@@ -58,22 +57,22 @@ const QuizCreator = props => {
             {
               props.editableQuestion !== null || props.isEditQuizTitle
                 ? <Button
-                  type="primary"
-                  onClick={newQuestionHandler}
-                >
-                  New question
-                </Button>
-              : null
+                    type="primary"
+                    onClick={newQuestionHandler}
+                  >
+                    Continue
+                  </Button>
+                : <Button
+                    type="success"
+                    onClick={createQuizHandler}
+                    disabled={props.quiz.length === 0}
+                  >
+                    Create quiz
+                  </Button>
             }
-            <Button
-              type="success"
-              onClick={createQuizHandler}
-              disabled={props.quiz.length === 0}
-            >
-              Create quiz
-            </Button>
+            
             <Button type="cancel" onClick={cancelHandler}>
-              Cancel
+              Reset
             </Button>
           </div>
         </div>

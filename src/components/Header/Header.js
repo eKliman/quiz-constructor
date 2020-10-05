@@ -15,10 +15,12 @@ const Header = () => {
             <NavLink to="/" exact>
               <img src={logo} className={classes.logo} alt="logo" />
             </NavLink>
-            <MenuToggle />
             <NavMenu />
           </div>
-          <AuthIcons />
+          <div className={classes.icons}>
+            <MenuToggle />
+            <AuthIcons />
+          </div>
         </div>
       </div>
     </header>

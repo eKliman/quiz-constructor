@@ -9,12 +9,16 @@
   display: none;
 }
 
-.visible {
+.menu {
   display: none;
 }
 
+.confirm {
+  display: block;
+}
+
 @media (max-width: 650px) {
-  .visible {
+  .menu {
     display: block;
   }
 }

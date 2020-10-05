@@ -24,7 +24,7 @@ const createFormControls = () => {
       value: '',
       type: 'password',
       label: 'Password',
-      errorMessage: 'Enter correct password',
+      errorMessage: 'Password must be at least 6 characters',
       valid: false,
       touched: false,
       validation: {
@@ -37,6 +37,7 @@ const createFormControls = () => {
 
 const initialState = {
   token: null,
+  userId: null,
   isFormValid: false,
   error: '',
   formControls: createFormControls(),
@@ -46,11 +47,14 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case AUTH_SUCCESS:
       return {
-        ...state, token: action.token, formControls: createFormControls()
+        ...state, 
+        token: action.token, 
+        userId: action.userId, 
+        formControls: createFormControls()
       }
     case AUTH_LOGOUT:
       return {
-        ...state, token: null
+        ...state, token: null, userId: null
       }
     case CHANGE_AUTH_FORM_CONTROLS:
       return {

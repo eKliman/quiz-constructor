@@ -6,7 +6,9 @@ import {
   QUIZ_SET_STATE,
   FINISH_QUIZ,
   QUIZ_NEXT_QUESTION,
-  QUIZ_RETRY
+  QUIZ_RETRY,
+  SET_DELETING_QUIZ_ID,
+  SET_DELETING_QUIZ_NAME
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -19,6 +21,8 @@ const initialState = {
   answerState: null,
   quiz: null,
   quizTitle: '',
+  deletingQuizId: '',
+  deletingQuizName: ''
 }
 
 const quizListReducer = (state = initialState, action) => {
@@ -50,6 +54,14 @@ const quizListReducer = (state = initialState, action) => {
     case QUIZ_NEXT_QUESTION:
       return {
         ...state, answerState: null, activeQuestion: action.number
+      }
+    case  SET_DELETING_QUIZ_ID:
+      return {
+        ...state, deletingQuizId: action.id
+      }
+    case  SET_DELETING_QUIZ_NAME:
+      return {
+        ...state, deletingQuizName: action.name
       }
     case QUIZ_RETRY:
       return {

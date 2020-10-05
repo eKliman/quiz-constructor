@@ -48,6 +48,7 @@ const QuizTitleCreater = props => {
         touched={props.titleControls.touched}
         errorMessage={props.titleControls.errorMessage}
         onChange={event => changeHandler(event.target.value)}
+        focus={true}
       />
       <Button
         type="primary"

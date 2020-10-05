@@ -7,7 +7,9 @@ import {
   QUIZ_SET_STATE,
   FINISH_QUIZ,
   QUIZ_NEXT_QUESTION,
-  QUIZ_RETRY
+  QUIZ_RETRY,
+  SET_DELETING_QUIZ_ID,
+  SET_DELETING_QUIZ_NAME
 } from './actionTypes'
 
 export const fetchQuizes = () => {
@@ -19,7 +21,8 @@ export const fetchQuizes = () => {
       Object.keys(response).forEach((key) => {
         quizes.push({
           id: key,
-          name: response[key].quizTitle
+          name: response[key].quizTitle,
+          userId: response[key].userId
         })
       })
       dispatch(fetchQuizesSuccess(quizes))
@@ -49,35 +52,49 @@ export const fetchQuizesError = e => {
   }
 }
 
-export function quizSetState(answerState, results) {
+export const quizSetState = (answerState, results) => {
   return {
     type: QUIZ_SET_STATE,
     answerState, results
   }
 }
 
-export function finishQuiz () {
+export const finishQuiz = () => {
   return {
     type: FINISH_QUIZ
   }
 }
 
-export function quizNextQuestion(number) {
+export const quizNextQuestion = number => {
   return {
     type: QUIZ_NEXT_QUESTION,
     number
   }
 }
 
-export function retryQuiz() {
+export const retryQuiz = () => {
   return {
     type: QUIZ_RETRY
   }
 }
 
+export const setDeletingQuizId = id => {
+  return {
+    type:  SET_DELETING_QUIZ_ID,
+    id
+  }
+}
+
+export const setDeletingQuizName = name => {
+  return {
+    type:  SET_DELETING_QUIZ_NAME,
+    name
+  }
+}
+
 const isQuizFinished = state => state.activeQuestion + 1 === state.quiz.length
 
-export function quizAnswerClick(answerId) {
+export const quizAnswerClick = answerId => {
   return (dispatch, getState) => {
     const state = getState().quiz
     if (state.answerState) {

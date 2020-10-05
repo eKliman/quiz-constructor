@@ -2,8 +2,8 @@
   padding: 15px 30px 20px;
   background: linear-gradient(
     135deg,
-    rgba(115, 63, 255, 0.5) 0%,
-    rgba(63, 184, 255, 0.5) 100%
+    rgba(115, 63, 255, 0.8) 0%,
+    rgba(63, 184, 255, 0.8) 100%
   );
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
@@ -11,8 +11,8 @@
   h1 {
     margin-bottom: 15px;
     width: fit-content;
-    border-bottom: 3px solid #000;
-    color: #000;
+    border-bottom: 3px solid #fff;
+    color: #fff;
     font-weight: bold;
   }
 
@@ -21,6 +21,7 @@
   }
 
   li {
+    position: relative;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
@@ -32,21 +33,49 @@
 
     &:hover {
       transform: scale(1.015);
-    }
 
-    &:active {
-      transform: scale(0.995);
-      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+      button {
+        opacity: 1;
+      }
     }
   }
 
   a {
     display: inline-block;
     width: 100%;
-    padding: 5px 10px;
+    padding: 8px 10px;
     color: #000;
     line-height: 1.5em;
     letter-spacing: 0.1px;
+    transition: 0.25s;
+
+    &:active {
+      transform: scale(0.985);
+    }
+  }
+
+  li button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    padding: 1px 8px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #ff0000;
+    font-size: 1.8em;
+    z-index: 10;
+    transition: 0.25s;
+    outline: none;
+
+    &:hover {
+      border: 2px solid #ff0000;
+    }
+
+    &:active {
+      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.4);
+    }
   }
 }
 

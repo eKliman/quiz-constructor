@@ -56,6 +56,7 @@ const renderInputs = props => {
           onChange={event =>
             changeHandler(event.target.value, controlName, props)
           }
+          focus={index === 0 ? true : false}
         />
         {index === 0 ? <hr /> : null}
       </Fragment>

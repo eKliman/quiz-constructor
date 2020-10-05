@@ -27,3 +27,12 @@ export const sendRequest = async (method, url, data = null, useBaseURL = true) =
     }
   }
 } 
+
+export const deleteItem = id => {
+  return fetch(
+    `${baseURL}quizes/${id}.json`,
+    {
+      method: 'DELETE',
+    }
+  );
+}

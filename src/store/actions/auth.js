@@ -21,10 +21,11 @@ export const setIsFormValid = isFormValid => {
   }
 }
 
-export const authSuccess = token => {
+export const authSuccess = (token, userId) => {
   return {
     type: AUTH_SUCCESS,
     token,
+    userId,
   }
 }
 
@@ -75,7 +76,7 @@ export const auth = (email, password, isLogin) => {
       localStorage.setItem('userId', data.localId)
       localStorage.setItem('expirationDate', expirationDate)
   
-      dispatch(authSuccess(data.idToken))
+      dispatch(authSuccess(data.idToken, data.localId))
       dispatch(autoLogout(data.expiresIn))
       dispatch(setAuthError(''))
     }
@@ -86,6 +87,7 @@ export const auth = (email, password, isLogin) => {
 export const autoLogin = () => {
   return dispatch => {
     const token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
 
     if (!token) {
       dispatch(logout())
@@ -94,7 +96,7 @@ export const autoLogin = () => {
       if (expirationDate <= new Date()) {
         dispatch(logout())
       } else {
-        dispatch(authSuccess(token))
+        dispatch(authSuccess(token, userId))
         dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
       }
     }

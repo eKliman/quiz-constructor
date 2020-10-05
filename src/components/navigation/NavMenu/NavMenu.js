@@ -37,7 +37,10 @@ const NavMenu = props => {
   return (
     <>
       <ul className={cls.join(' ')}>{renderLinks(links)}</ul> 
-      <Backdrop />
+      <Backdrop 
+        onClick={props.closeMenu}
+        class={props.menu ? 'menu' : ''}
+      />
     </>
   )
 } 
