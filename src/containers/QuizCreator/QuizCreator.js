@@ -24,7 +24,7 @@ const QuizCreator = props => {
   const createQuizHandler = async event => {
     event.preventDefault()
     props.fetchQuizesStart()
-    await props.finishCreateQuiz()
+    await props.finishCreateQuiz(props.token)
     props.history.push('/')
   } 
 
@@ -43,7 +43,7 @@ const QuizCreator = props => {
   }
 
   return (
-    props.isAuthenticated 
+    props.token 
       ? <div className={classes.QuizCreator}>
           <h1>Quiz creation</h1>
           <QuestionList />
@@ -87,13 +87,13 @@ const mapStateToProps = state => {
     isEditQuizTitle: state.create.isEditQuizTitle,
     editableQuestion: state.create.editableQuestion,
     loading: state.quiz.loading,
-    isAuthenticated: !!state.auth.token,
+    token: state.auth.token,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    finishCreateQuiz: () => dispatch(finishCreateQuiz()),
+    finishCreateQuiz: (token) => dispatch(finishCreateQuiz(token)),
     setInitialState: () => dispatch(setInitialState()),
     changeRightAnswer: id => dispatch(changeRightAnswer(id)),
     changeFormControls: data => dispatch(changeFormControls(data)),

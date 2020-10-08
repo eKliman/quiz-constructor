@@ -12,7 +12,7 @@ class QuizList extends React.Component {
     this.props.setDeletingQuizName(name)
   }
   renderQuizes() {
-    return this.props.quizes.reverse().map(quiz=> {
+    return this.props.quizes.map(quiz=> {
       return (
         <li
           key={quiz.id}

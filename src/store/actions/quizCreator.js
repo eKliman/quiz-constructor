@@ -41,13 +41,13 @@ export const createQuizQuestion = questionItem => {
   }
 }
 
-export const finishCreateQuiz = () => {
+export const finishCreateQuiz = (token) => {
   return async (dispatch, getState) => {
     await sendRequest('POST', 'quizes.json', {
       quizTitle: getState().create.quizTitle, 
       quiz: getState().create.quiz,
       userId: getState().auth.userId,
-    }) 
+    }, true, token) 
     dispatch(setInitialState()) 
   }
 }

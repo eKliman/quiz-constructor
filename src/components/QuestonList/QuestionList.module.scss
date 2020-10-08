@@ -30,7 +30,7 @@
   transition: 0.25s;
 
   &.active {
-    background-color: rgba(115, 63, 255, 0.25);
+    background-color: rgb(0, 255, 0);
     font-weight: bold;
   }
 
@@ -39,11 +39,11 @@
   }
 
   &:hover {
-    background-color: rgba(115, 63, 255, 0.25);
+    background-color: rgba(0, 255, 0, 0.7);
   }
 
   &:active {
-    background-color: rgba(115, 63, 255, 0.3);
+    background-color: rgb(0, 255, 0);
   }
 }
 .title {

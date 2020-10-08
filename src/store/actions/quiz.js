@@ -25,7 +25,7 @@ export const fetchQuizes = () => {
           userId: response[key].userId
         })
       })
-      dispatch(fetchQuizesSuccess(quizes))
+      dispatch(fetchQuizesSuccess(quizes.reverse()))
     } catch (e) {
       dispatch(fetchQuizesError(e))
     }

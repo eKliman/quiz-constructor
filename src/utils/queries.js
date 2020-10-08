@@ -1,12 +1,12 @@
 const baseURL = 'https://quiz-constructor.firebaseio.com/' 
 
-export const sendRequest = async (method, url, data = null, useBaseURL = true) => {
+export const sendRequest = async (method, url, data = null, useBaseURL = true, token = '') => {
   const headers = { 'Content-Type': 'application/json' } 
   const requestURL = useBaseURL ? baseURL + url : url 
 
   if (method === 'POST') {
     try {
-      const response = await fetch(requestURL, {
+      const response = await fetch(requestURL + (token ? `?auth=${token}` : ''), {
         method: method,
         body: JSON.stringify(data),
         headers: headers,
@@ -28,9 +28,9 @@ export const sendRequest = async (method, url, data = null, useBaseURL = true) =
   }
 } 
 
-export const deleteItem = id => {
+export const deleteItem = (id, token) => {
   return fetch(
-    `${baseURL}quizes/${id}.json`,
+    `${baseURL}quizes/${id}.json?auth=${token}`,
     {
       method: 'DELETE',
     }

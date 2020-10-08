@@ -14,7 +14,7 @@ const Confirmation = props => {
   }
 
   const deleteHandler = () => {
-    deleteItem(props.deletingQuizId)
+    deleteItem(props.deletingQuizId, props.token)
     props.fetchQuizes()
     cancelHandler()
   }
@@ -53,7 +53,8 @@ const Confirmation = props => {
 const mapStateToProps = state => {
   return {
     deletingQuizId: state.quiz.deletingQuizId,
-    deletingQuizName: state.quiz.deletingQuizName
+    deletingQuizName: state.quiz.deletingQuizName,
+    token: state.auth.token
   }
 }
 

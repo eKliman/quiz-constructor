@@ -5,7 +5,6 @@ import classes from './MenuToggle.module.scss'
 
 const MenuToggle = props => {
   const cls = [
-    classes.MenuToggle,
     'fas'
   ]
 
@@ -16,10 +15,13 @@ const MenuToggle = props => {
     cls.push('fa-bars')
   }
   return (
-    <i 
-      className={cls.join(' ')}
+    <button
+      className={classes.MenuToggle}
       onClick={props.toggleMenu}
-    />
+    >
+      <i className={cls.join(' ')}/>
+    </button>
+    
   )
 }
 

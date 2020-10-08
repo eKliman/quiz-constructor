@@ -1,10 +1,15 @@
 .MenuToggle {
+  display: flex;
   margin-right: 20px;
+  border: none;
+  background-color: transparent;
   font-size: 1.6em;
   cursor: pointer;
   color: #fff;
   transition: opacity, left 0.22s ease-in;
   z-index: 100;
+  transition: 0.3s;
+  outline: none;
 }
 
 .MenuToggle:hover {
