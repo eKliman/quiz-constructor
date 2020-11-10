@@ -4,6 +4,7 @@ import {
   CHANGE_AUTH_FORM_CONTROLS,
   SET_IS_FORM_VALID,
   SET_AUTH_ERROR,
+  CLEAR_AUTH_STATE
 } from '../actions/actionTypes'
 
 const createFormControls = () => {
@@ -66,7 +67,11 @@ export default function authReducer(state = initialState, action) {
       }
     case SET_AUTH_ERROR:
       return {
-        ...state, error: action.error
+        ...state, error: action.error, isFormValid: true
+      }
+    case CLEAR_AUTH_STATE:
+      return {
+        ...state, isFormValid: false, error: '', formControls: createFormControls()
       }
     default:
       return state

@@ -13,8 +13,8 @@ const Confirmation = props => {
     props.setDeletingQuizName('')
   }
 
-  const deleteHandler = () => {
-    deleteItem(props.deletingQuizId, props.token)
+  const deleteHandler = async () => {
+    await deleteItem(props.deletingQuizId, props.token)
     props.fetchQuizes()
     cancelHandler()
   }

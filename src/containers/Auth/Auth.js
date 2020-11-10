@@ -4,24 +4,25 @@ import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import {connect} from 'react-redux'
 import {validateControl} from '../../utils/validation'
-import {auth} from '../../store/actions/auth'
+import {auth, clearAuthState} from '../../store/actions/auth'
 import {changeAuthFormControls, setIsFormValid} from '../../store/actions/auth'
 
-const Auth = props => {
-  const authHandler = val => {
-    props.auth(
-      props.formControls.email.value,
-      props.formControls.password.value,
+class Auth extends React.Component {
+  authHandler = val => {
+    this.props.setIsFormValid(false)
+    this.props.auth(
+      this.props.formControls.email.value,
+      this.props.formControls.password.value,
       val
     )
   } 
 
-  const submitHandler = event => {
+  submitHandler = event => {
     event.preventDefault()
   }
 
-  const onChangeHandler = (event, controlName, isBlur = false) => {
-    const formControls = {...props.formControls}
+  onChangeHandler = (event, controlName, isBlur = false) => {
+    const formControls = {...this.props.formControls}
     const control = {...formControls[controlName]}
 
     control.value = event.target.value
@@ -36,13 +37,17 @@ const Auth = props => {
     Object.keys(formControls).forEach(name => {
       isFormValid = formControls[name].valid && isFormValid
     })
-    props.changeAuthFormControls(formControls)
-    props.setIsFormValid(isFormValid)
+    this.props.changeAuthFormControls(formControls)
+    this.props.setIsFormValid(isFormValid)
   }
 
-  const renderInputs = () => {
-    return Object.keys(props.formControls).map((controlName, index) => {
-      const control = props.formControls[controlName]
+  componentWillUnmount() {
+    this.props.clearAuthState()
+  }
+
+  renderInputs = () => {
+    return Object.keys(this.props.formControls).map((controlName, index) => {
+      const control = this.props.formControls[controlName]
       return (
         <Input
           key={controlName + index}
@@ -53,38 +58,40 @@ const Auth = props => {
           label={control.label}
           shouldValidate={!!control.validation}
           errorMessage={control.errorMessage}
-          onChange={event => onChangeHandler(event, controlName)}
-          onBlur={event => onChangeHandler(event, controlName, true)}
+          onChange={event => this.onChangeHandler(event, controlName)}
+          onBlur={event => this.onChangeHandler(event, controlName, true)}
         />
       )
     })
   }
 
-  return (
-    <div className={classes.Auth}>
-      <h1>Authorization</h1>
-      <form onSubmit={submitHandler} className={classes.AuthForm}>
-        {renderInputs()}
-        {props.error ? <span>{props.error}</span> : null}
+  render() {
+    return (
+      <div className={classes.Auth}>
+        <h1>Authorization</h1>
+        <form onSubmit={this.submitHandler} className={classes.AuthForm}>
+          {this.renderInputs()}
+          {this.props.error ? <span>{this.props.error}</span> : null}
 
-        <Button 
-          type="success" 
-          onClick={() => authHandler(true)}
-          disabled={!props.isFormValid}
-        >
-          LogIn
-        </Button>
+          <Button 
+            type="success" 
+            onClick={() => this.authHandler(true)}
+            disabled={!this.props.isFormValid}
+          >
+            LogIn
+          </Button>
 
-        <Button 
-          type="primary" 
-          onClick={() => authHandler(false)}
-          disabled={!props.isFormValid}
-        >
-          Sing up
-        </Button>
-      </form>
-    </div>
-  )
+          <Button 
+            type="primary" 
+            onClick={() => this.authHandler(false)}
+            disabled={!this.props.isFormValid}
+          >
+            Sing up
+          </Button>
+        </form>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -102,6 +109,7 @@ const mapDispatchToProps = dispatch => {
     changeAuthFormControls: formControls => dispatch(changeAuthFormControls(formControls)),
     setIsFormValid: isFormValid => dispatch(setIsFormValid(isFormValid)),
     auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
+    clearAuthState: () => dispatch(clearAuthState())
   }
 }
 

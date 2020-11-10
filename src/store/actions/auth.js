@@ -5,6 +5,7 @@ import {
   CHANGE_AUTH_FORM_CONTROLS,
   SET_IS_FORM_VALID,
   SET_AUTH_ERROR,
+  CLEAR_AUTH_STATE
 } from './actionTypes'
 
 export const changeAuthFormControls = formControls => {
@@ -32,6 +33,13 @@ export const authSuccess = (token, userId) => {
 export const setAuthError = error => {
   return {
     type: SET_AUTH_ERROR,
+    error,
+  }
+}
+
+export const clearAuthState = error => {
+  return {
+    type: CLEAR_AUTH_STATE,
     error,
   }
 }

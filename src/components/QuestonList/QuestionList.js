@@ -37,7 +37,7 @@ const QuestionList = props => {
     return formControls
   }
 
-  const listItemHandler = (event) => {
+  const listItemHandler = event => {
     props.setEditableQuestion(+event.target.id)
     props.changeFormControls(insertDataToFormControls(event.target.id))
     props.changeRightAnswer(props.quiz[event.target.id].rightAnswerId)
@@ -56,12 +56,6 @@ const QuestionList = props => {
         >
           {`${item.id + 1}. ${item.question}`}
         </NavLink>
-        {/* <QuestionListItem
-          onClick={listItemHandler}
-          id={item.id}
-        >
-          {`${item.id + 1}. ${item.question}`}
-        </QuestionListItem> */}
       </li>
     )) 
 
@@ -94,8 +88,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeIsRenderTitle: (value) => dispatch(changeIsRenderTitle(value)),
-    setEditableQuestion: (id) => dispatch(setEditableQuestion(id)),
+    changeIsRenderTitle: value => dispatch(changeIsRenderTitle(value)),
+    setEditableQuestion: id => dispatch(setEditableQuestion(id)),
     changeRightAnswer: id => dispatch(changeRightAnswer(id)),
     changeFormControls: data => dispatch(changeFormControls(data)),
     changeIsFormValid: data => dispatch(changeIsFormValid(data)),
